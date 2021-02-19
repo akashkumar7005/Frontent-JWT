@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Route exact path='/'><Login/></Route>
+      <Route exact path='/'><SignInOutContainer/></Route>
       <Route path='/user'><UserDash/></Route>
       <Route path='/delivery'><DeliveryDash/></Route>
     {/* <Route path="/" ><Form/></Route>

@@ -117,7 +117,6 @@ onSubmit(event)
         email:this.state.email,
         phone:this.state.phone,
         password:this.state.password,
-        confirmpassword:this.state.confirmpassword,
         role:this.state.selectedOption,
         vehicleNumber:this.state.vehicleNumber,
         location:this.state.location,
@@ -133,7 +132,6 @@ onSubmit(event)
         email:'',
         phone:'',
         password:'',
-        confirmpassword:'',
         selectedOption:'',
         vehicleNumber:'',
         location:'',
@@ -178,12 +176,12 @@ onSubmit(event)
                 onChange={this.changePassword} value={this.state.password}/>
                <TextField label='Confirm Password' placeholder="Confirm Password" fullWidth required
                 onChange={this.changeConfirmPassword} value={this.state.confirmpassword}/>
-                <div className="radio"> Do you wish to work as delivery executive?
+                <div className="radio" > Do you wish to work as delivery executive?
                 <label>                    
-                    <input type="radio" value="option2" 
+                    <input type="radio" value="delivery" 
                     clickedYes={this.state.clickedYes}
                     onClick={this.yesHandler}
-                        checked={this.state.selectedOption === 'option2'} 
+                        checked={this.state.selectedOption === 'delivery'} 
                         onChange={this.changeRole} />
                     
                 </label>

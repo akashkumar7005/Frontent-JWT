@@ -8,6 +8,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { Redirect, useHistory } from "react-router-dom";
 import { Router, Route, hashHistory} from "react-router";
+import { withRouter } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 
 
@@ -79,13 +81,32 @@ class Login extends React.Component{
 
     }
     
-
+   
+    //Posting Data to the Server.
     axios.post('http://localhost:5210/users/authenticate',loggedin)
     .then(res=>{
-        localStorage.setItem("jwt",res.data.token );
-        this.props.router.replace('/user');
+        localStorage.setItem("jwt",res.data.token)
+        this.props.history.push('/user')
+
+    //Decoding the token and fetching the roles of the loggedIn user.
+     var token1=JSON.parse(localStorage.getItem("jwt",res.data.token.role))
+     var decoded = jwt_decode(token1);
+     console.log(decoded);
+
+
+    //Rendering condition for User and Delivery Executive.
+        // if(token1 == delivery  )
+        // {
+        //     this.props.history.push('/delivery')
+        // }
+        // else
+        // {
+        //     this.props.history.push('/user')
+        // }
+
     
   });
+
     
     this.setState({
         email:'',
@@ -148,6 +169,5 @@ class Login extends React.Component{
         </div>
       
     )}
-                            }
-            
-export default Login;
+             }
+             export default withRouter(Login);   

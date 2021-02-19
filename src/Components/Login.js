@@ -86,23 +86,23 @@ class Login extends React.Component{
     axios.post('http://localhost:5210/users/authenticate',loggedin)
     .then(res=>{
         localStorage.setItem("jwt",res.data.token)
-        this.props.history.push('/user')
+       
 
     //Decoding the token and fetching the roles of the loggedIn user.
-     var token1=JSON.parse(localStorage.getItem("jwt",res.data.token.role))
+     var token1=(localStorage.getItem("jwt",res.data.token))
      var decoded = jwt_decode(token1);
-     console.log(decoded);
+     console.log(decoded.role);
 
 
-    //Rendering condition for User and Delivery Executive.
-        // if(token1 == delivery  )
-        // {
-        //     this.props.history.push('/delivery')
-        // }
-        // else
-        // {
-        //     this.props.history.push('/user')
-        // }
+    // Rendering condition for User and Delivery Executive.
+        if("delivery" == decoded.role  )
+        {
+            this.props.history.push('/delivery')
+        }
+        else
+        {
+            this.props.history.push('/user')
+        }
 
     
   });

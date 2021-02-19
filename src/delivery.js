@@ -14,7 +14,7 @@ function logOut()
 }
   return (
    <div>
-       <h1>Hello User</h1>
+       <h1>Hello Delivery</h1>
        <button  onClick={logOut}>Logout</button>
    </div>
   );

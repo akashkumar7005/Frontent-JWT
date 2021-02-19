@@ -6,6 +6,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import { Redirect, useHistory } from "react-router-dom";
+import { Router, Route, hashHistory} from "react-router";
+
 
 
 const paperStyle = { padding: 20, height: '60vh', width: 300, margin: "0 auto" }
@@ -34,9 +37,9 @@ const onSubmit = (values, props) => {
 
 
 class Login extends React.Component{
-    constructor()
+    constructor(props)
     {
-        super()
+        super(props)
         this.state={
 
         email:'',
@@ -75,8 +78,14 @@ class Login extends React.Component{
       
 
     }
-    axios.post('http://localhost:5000/app/login',loggedin)
-    .then(res=>console.log(res.data));
+    
+
+    axios.post('http://localhost:5210/users/authenticate',loggedin)
+    .then(res=>{
+        localStorage.setItem("jwt",res.data.token );
+        this.props.router.replace('/user');
+    
+  });
     
     this.setState({
         email:'',
@@ -133,12 +142,7 @@ class Login extends React.Component{
 
                     )}
                 </Formik>
-            
-              {/* <Typography>Do you have an account?
-         <Link href="#" onClick={() => handleChange('event', 1)}>
-                        Sign Up
-          </Link>
-                </Typography> */}
+        
             </Paper>
         </Grid>
         </div>
